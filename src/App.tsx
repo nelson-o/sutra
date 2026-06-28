@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import sutra from "../data/sutra/diamond-sutra/sanskrit-devanagari.txt?raw";
 
 const passages = sutra.trim().split(/\n\s*\n/);
 const sectionMarker = /(॥[०-९]+॥)/g;
 const isSectionMarker = /^॥[०-९]+॥$/;
+const compactHeaderScrollThreshold = 16;
 
 function renderPassage(passage: string) {
   return passage.split(sectionMarker).map((part, index) =>
@@ -17,19 +19,28 @@ function renderPassage(passage: string) {
 }
 
 function App() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateHeader = () => {
+      setIsScrolled(window.scrollY > compactHeaderScrollThreshold);
+    };
+
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+
+    return () => window.removeEventListener("scroll", updateHeader);
+  }, []);
+
   return (
     <main className="sutra-page">
-      <header className="masthead">
-        <span className="masthead__mark" aria-hidden="true">
-          ◆
-        </span>
-        <div>
-          <p className="masthead__kicker">
-            Vajracchedikā Prajñāpāramitā Sūtra
-          </p>
+      <div className="masthead-space">
+        <header
+          className={`masthead${isScrolled ? " masthead--compact" : ""}`}
+        >
           <h1>वज्रच्छेदिका</h1>
-        </div>
-      </header>
+        </header>
+      </div>
 
       <article
         className="sutra-text"

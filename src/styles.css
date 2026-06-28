@@ -33,27 +33,26 @@ body {
   padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(5rem, 10vw, 9rem);
 }
 
-.masthead {
+.masthead-space {
   width: min(100%, 48rem);
   margin: 0 auto clamp(2rem, 6vh, 4rem);
-  padding-bottom: clamp(1.25rem, 3vw, 2rem);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  height: clamp(7rem, 18vw, 10rem);
+  position: relative;
+}
+
+.masthead {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.25rem, 3vw, 2rem);
   border-bottom: 1px solid rgba(104, 52, 30, 0.24);
-}
-
-.masthead__mark {
-  color: #9a3f28;
-  font-size: 1.1rem;
-}
-
-.masthead__kicker {
-  margin: 0 0 0.4rem;
-  color: #79584a;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 h1 {
@@ -65,6 +64,25 @@ h1 {
   font-size: clamp(2.25rem, 8vw, 4.5rem);
   font-weight: 500;
   line-height: 1;
+  transition:
+    font-size 180ms ease,
+    line-height 180ms ease;
+}
+
+.masthead--compact {
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  padding: 0.6rem 1rem 0.5rem;
+  border-color: rgba(104, 52, 30, 0.2);
+  background: rgba(245, 237, 219, 0.94);
+  box-shadow: 0 0.35rem 1.25rem rgba(67, 43, 28, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.masthead--compact h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  line-height: 1.15;
 }
 
 .sutra-text {
@@ -105,15 +123,14 @@ h1 {
     width: min(100% - 1.25rem, 72rem);
   }
 
-  .masthead {
-    align-items: flex-start;
-  }
-
-  .masthead__kicker {
-    letter-spacing: 0.07em;
-  }
-
   .sutra-text {
     line-height: 1.85;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masthead,
+  h1 {
+    transition: none;
   }
 }
