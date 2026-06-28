@@ -1,11 +1,8 @@
 :root {
-  color: #251d16;
-  background: #efe5d1;
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  color: #2b2018;
+  background: #eee3cc;
+  font-family: Georgia, "Times New Roman", serif;
   font-synthesis: none;
-  line-height: 1.5;
   text-rendering: optimizeLegibility;
 }
 
@@ -13,184 +10,110 @@
   box-sizing: border-box;
 }
 
+html {
+  background: #eee3cc;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 50% 0%, rgba(201, 159, 83, 0.22), transparent 30rem),
-    linear-gradient(180deg, #f7efdD 0%, #eee1c6 42%, #e3d1ad 100%);
+    radial-gradient(
+      circle at 50% -10rem,
+      rgba(255, 252, 239, 0.96),
+      transparent 38rem
+    ),
+    linear-gradient(180deg, #f5eddb 0%, #eee2c9 55%, #e7d8ba 100%);
 }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-.page-shell {
-  width: min(1120px, calc(100% - 32px));
+.sutra-page {
+  width: min(100% - 2rem, 72rem);
   margin: 0 auto;
-  padding: 32px 0 48px;
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(5rem, 10vw, 9rem);
 }
 
-.hero {
-  min-height: min(680px, calc(100vh - 64px));
-  display: grid;
-  align-content: center;
-  gap: 22px;
-  padding: 64px 0 48px;
-  border-bottom: 1px solid rgba(77, 55, 30, 0.18);
-  position: relative;
+.masthead {
+  width: min(100%, 48rem);
+  margin: 0 auto clamp(2rem, 6vh, 4rem);
+  padding-bottom: clamp(1.25rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(104, 52, 30, 0.24);
 }
 
-.hero__mark {
-  width: 72px;
-  height: 72px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(143, 97, 36, 0.42);
-  color: #8a5d24;
-  font-size: 2rem;
-  background: rgba(255, 248, 232, 0.56);
+.masthead__mark {
+  color: #9a3f28;
+  font-size: 1.1rem;
 }
 
-.eyebrow {
-  margin: 0;
-  color: #76511f;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0;
+.masthead__kicker {
+  margin: 0 0 0.4rem;
+  color: #79584a;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-h1,
-h2,
-p,
-blockquote {
-  margin-top: 0;
-}
-
 h1 {
-  max-width: 840px;
-  margin-bottom: 0;
-  color: #1f1711;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(4rem, 15vw, 9.5rem);
+  margin: 0;
+  color: #291d16;
+  font-family:
+    "Noto Serif Devanagari", "Kohinoor Devanagari",
+    "Devanagari Sangam MN", "Nirmala UI", serif;
+  font-size: clamp(2.25rem, 8vw, 4.5rem);
   font-weight: 500;
-  line-height: 0.92;
-  letter-spacing: 0;
+  line-height: 1;
 }
 
-h2 {
-  margin-bottom: 12px;
-  color: #2d2117;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.7rem, 4vw, 3rem);
-  font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: 0;
+.sutra-text {
+  width: min(100%, 48rem);
+  margin: 0 auto;
+  color: #30241b;
+  font-family:
+    "Noto Serif Devanagari", "Kohinoor Devanagari",
+    "Devanagari Sangam MN", "Nirmala UI", serif;
+  font-size: clamp(1.22rem, 1.05rem + 0.7vw, 1.7rem);
+  line-height: 1.95;
 }
 
-.hero__copy {
-  max-width: 680px;
-  margin-bottom: 0;
-  color: #473525;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+.sutra-text p {
+  margin: 0 0 1.7em;
 }
 
-.hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding-top: 10px;
-}
-
-.hero__meta span {
-  border: 1px solid rgba(98, 71, 39, 0.18);
-  background: rgba(255, 252, 243, 0.5);
-  color: #4d3926;
-  padding: 8px 12px;
-  font-size: 0.92rem;
-}
-
-.reading-panel,
-.context-grid,
-.closing {
-  padding: 48px 0 0;
-}
-
-.section-heading {
-  max-width: 720px;
-  margin-bottom: 24px;
-}
-
-.excerpt-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.excerpt-card,
-.context-grid article {
-  border: 1px solid rgba(80, 58, 33, 0.16);
-  background: rgba(255, 250, 238, 0.64);
-  padding: 24px;
-}
-
-.excerpt-card__title {
-  margin-bottom: 18px;
-  color: #7a5524;
-  font-size: 0.84rem;
-  font-weight: 700;
-}
-
-blockquote {
-  margin-bottom: 18px;
-  color: #1e1711;
-  font-family: "Songti TC", "Noto Serif CJK TC", "PMingLiU", serif;
-  font-size: clamp(1.9rem, 5vw, 3rem);
-  line-height: 1.22;
-}
-
-.excerpt-card p:last-child,
-.context-grid p,
-.closing p {
-  margin-bottom: 0;
-  color: #51402f;
-}
-
-.context-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.context-grid h2 {
-  font-size: 1.45rem;
-}
-
-.closing {
-  color: #6e4d20;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.2rem;
+.sutra-text p:first-child {
+  color: #8d3b27;
+  font-size: 1.08em;
   text-align: center;
 }
 
-@media (max-width: 820px) {
-  .page-shell {
-    width: min(100% - 24px, 680px);
-    padding-top: 18px;
+.sutra-text__section {
+  color: #986c56;
+  font-size: 0.78em;
+  white-space: nowrap;
+}
+
+.sutra-text__colophon {
+  margin-top: 3.5rem !important;
+  color: #7f3626;
+  text-align: center;
+}
+
+@media (max-width: 540px) {
+  .sutra-page {
+    width: min(100% - 1.25rem, 72rem);
   }
 
-  .hero {
-    min-height: auto;
-    padding: 44px 0 36px;
+  .masthead {
+    align-items: flex-start;
   }
 
-  .excerpt-grid,
-  .context-grid {
-    grid-template-columns: 1fr;
+  .masthead__kicker {
+    letter-spacing: 0.07em;
+  }
+
+  .sutra-text {
+    line-height: 1.85;
   }
 }

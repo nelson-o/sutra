@@ -1,6 +1,7 @@
 # Diamond Sutra
 
-A Bun-powered Vite, React, and TypeScript single page app for presenting selected Diamond Sutra passages on GitHub Pages.
+A Bun-powered Vite, React, and TypeScript reading page for the complete
+Devanāgarī Sanskrit Diamond Sutra on GitHub Pages.
 
 ## Development
 

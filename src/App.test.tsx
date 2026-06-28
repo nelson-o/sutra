@@ -1,18 +1,34 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import App from "./App";
 
-describe("Diamond Sutra landing page", () => {
-  it("presents a readable sutra-first landing page", () => {
+afterEach(cleanup);
+
+describe("Diamond Sutra Devanagari reader", () => {
+  it("renders the compact heading and complete sutra boundaries", () => {
+    render(<App />);
+
+    const reader = screen.getByRole("article", {
+      name: /complete diamond sutra in sanskrit/i
+    });
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: "वज्रच्छेदिका" })
+    ).toBeInTheDocument();
+    expect(reader).toHaveTextContent("एवं मया श्रुतम्");
+    expect(reader).toHaveTextContent("॥३२॥");
+    expect(reader).toHaveTextContent(
+      "आर्यवज्रच्छेदिका भगवती प्रज्ञापारमिता समाप्ता"
+    );
+    expect(screen.getByText("॥३२॥")).toHaveClass("sutra-text__section");
+  });
+
+  it("removes the old excerpt landing content", () => {
     render(<App />);
 
     expect(
-      screen.getByRole("heading", { level: 1, name: /diamond sutra/i })
-    ).toBeInTheDocument();
-    expect(screen.getByText(/selected public-domain Chinese passages/i)).toBeInTheDocument();
-    expect(screen.getByText(/一切有為法/)).toBeInTheDocument();
-    expect(screen.getByText(/About the text/i)).toBeInTheDocument();
-    expect(screen.getByText(/Reading focus/i)).toBeInTheDocument();
-    expect(screen.getByText(/No network requests/i)).toBeInTheDocument();
+      screen.queryByText(/selected public-domain Chinese passages/i)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/About the text/i)).not.toBeInTheDocument();
   });
 });
