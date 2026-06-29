@@ -5,7 +5,7 @@ import {
   screen,
   within
 } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
 
 function setScrollY(value: number) {
@@ -55,6 +55,8 @@ describe("Diamond Sutra Devanagari reader", () => {
     const previous = screen.getByRole("button", { name: /previous marker/i });
     const next = screen.getByRole("button", { name: /next marker/i });
 
+    expect(previous).toHaveTextContent("<");
+    expect(next).toHaveTextContent(">");
     expect(previous).toBeDisabled();
     expect(next).not.toBeDisabled();
     expect(screen.getByText("1 / 32")).toBeInTheDocument();
@@ -108,6 +110,45 @@ describe("Diamond Sutra Devanagari reader", () => {
     expect(reader).toHaveTextContent("॥१॥");
     expect(reader).not.toHaveTextContent("॥३२॥");
     expect(screen.getByText("1 / 32")).toBeInTheDocument();
+  });
+
+  it("keeps every marker reachable through next navigation", () => {
+    render(<App />);
+
+    const next = screen.getByRole("button", { name: /next marker/i });
+
+    for (let markerNumber = 2; markerNumber <= 32; markerNumber += 1) {
+      fireEvent.click(next);
+
+      expect(screen.getByText(`${markerNumber} / 32`)).toBeInTheDocument();
+    }
+
+    expect(next).toBeDisabled();
+  });
+
+  it("renders when reading progress storage is unavailable", () => {
+    const getItem = vi
+      .spyOn(Storage.prototype, "getItem")
+      .mockImplementation(() => {
+        throw new Error("storage unavailable");
+      });
+    const setItem = vi
+      .spyOn(Storage.prototype, "setItem")
+      .mockImplementation(() => {
+        throw new Error("storage unavailable");
+      });
+
+    render(<App />);
+
+    const reader = screen.getByRole("article", {
+      name: /complete diamond sutra in sanskrit/i
+    });
+
+    expect(reader).toHaveTextContent("॥१॥");
+    expect(screen.getByText("1 / 32")).toBeInTheDocument();
+
+    getItem.mockRestore();
+    setItem.mockRestore();
   });
 
   it("fixes a smaller heading after a slight scroll and restores it at top", () => {
