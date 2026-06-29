@@ -13,8 +13,7 @@ bun run dev
 ## Verification
 
 ```bash
-bun run test
-bun run build
+bun run check
 ```
 
 The app is configured for GitHub Pages at `/sutra/`.
