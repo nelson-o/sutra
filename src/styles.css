@@ -30,7 +30,7 @@ body {
 .sutra-page {
   width: min(100% - 2rem, 72rem);
   margin: 0 auto;
-  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(5rem, 10vw, 9rem);
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(7.5rem, 12vw, 10rem);
 }
 
 .masthead-space {
@@ -118,6 +118,83 @@ h1 {
   text-align: center;
 }
 
+.sutra-paginator {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 1fr) auto minmax(6.5rem, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem max(1rem, env(safe-area-inset-right))
+    max(0.75rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  border-top: 1px solid rgba(104, 52, 30, 0.18);
+  background: rgba(245, 237, 219, 0.94);
+  box-shadow: 0 -0.35rem 1.25rem rgba(67, 43, 28, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.sutra-paginator__button {
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(104, 52, 30, 0.26);
+  border-radius: 999px;
+  background: rgba(255, 252, 239, 0.42);
+  color: #4b2b1f;
+  font: 600 0.82rem/1 Georgia, "Times New Roman", serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.sutra-paginator__button:first-child {
+  justify-self: end;
+}
+
+.sutra-paginator__button:last-child {
+  justify-self: start;
+}
+
+.sutra-paginator__button:hover:not(:disabled) {
+  border-color: rgba(104, 52, 30, 0.46);
+  background: rgba(255, 252, 239, 0.72);
+}
+
+.sutra-paginator__button:disabled {
+  color: rgba(75, 43, 31, 0.38);
+  cursor: default;
+}
+
+.sutra-paginator__status {
+  min-width: 7.25rem;
+  text-align: center;
+  color: #30241b;
+}
+
+.sutra-paginator__marker {
+  display: block;
+  font-family:
+    "Noto Serif Devanagari", "Kohinoor Devanagari",
+    "Devanagari Sangam MN", "Nirmala UI", serif;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.sutra-paginator__count {
+  display: block;
+  margin-top: 0.12rem;
+  color: #7b5a47;
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
 @media (max-width: 540px) {
   .sutra-page {
     width: min(100% - 1.25rem, 72rem);
@@ -126,11 +203,25 @@ h1 {
   .sutra-text {
     line-height: 1.85;
   }
+
+  .sutra-paginator {
+    grid-template-columns: minmax(5.5rem, 1fr) auto minmax(5.5rem, 1fr);
+    gap: 0.5rem;
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .sutra-paginator__button {
+    min-height: 2.5rem;
+    padding: 0 0.75rem;
+    font-size: 0.72rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .masthead,
-  h1 {
+  h1,
+  .sutra-paginator__button {
     transition: none;
   }
 }
